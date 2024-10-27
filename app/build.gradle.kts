@@ -80,4 +80,6 @@ dependencies {
     //sdp
     implementation (libs.sdp)
 
+    // Hilt for Jetpack Compose navigation
+    implementation( "androidx.hilt:hilt-navigation-compose:1.2.0")
 }

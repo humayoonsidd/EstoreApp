@@ -6,24 +6,30 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.shoppingcart.estoreapp.ui.cart.CartScreen
+import com.shoppingcart.estoreapp.ui.product.ProductListScreen
 import com.shoppingcart.estoreapp.ui.theme.EStoreAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             EStoreAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    MainScreen()
                 }
             }
         }
@@ -31,17 +37,25 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun MainScreen() {
+    val navController = rememberNavController()
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EStoreAppTheme {
-        Greeting("Android")
+    NavHost(
+        navController = navController,
+        startDestination = "productList"
+    ) {
+        composable("productList") {
+            ProductListScreen(
+                onProductClick = { product ->
+                    // Navigate to Product Details screen (if required) with the product info
+                },
+                onCartClick = {
+                    navController.navigate("cart")
+                }
+            )
+        }
+        composable("cart") {
+            CartScreen()
+        }
     }
 }
