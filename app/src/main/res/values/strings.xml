@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EStoreApp</string>
+    <string name="total_str">Total:</string>
+    <string name="e_store_cart_str">E Store Cart</string>
 </resources>
