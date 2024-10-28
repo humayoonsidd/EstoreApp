@@ -7,7 +7,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.shoppingcart.estoreapp.data.model.Product
-
+/**
+ * ProductItem is a Composable function that represents a single product
+ * in the shopping application. This function displays the product's
+ * details and provides interactive elements for the user. Key features
+ * include:
+ *
+ * - Displaying the product name and description.
+ * - Showing the product price.
+ * - Providing a button to add the product to the cart.
+ * - Making the entire product card clickable to navigate to a detailed
+ *   product view.
+ *
+ * This component is designed to be used within a list of products,
+ * where each product can be selected or added to the shopping cart
+ * directly from the displayed card.
+ *
+ * @param product The Product data class containing the product details
+ * to be displayed.
+ * @param onAddToCart A lambda function to handle the action of adding
+ * the product to the cart when the user clicks the "Add to Cart" button.
+ * @param onProductClick A lambda function that takes a Product as a
+ * parameter, used to handle the action when the product card is clicked.
+ */
 @Composable
 fun ProductItem(
     product: Product,

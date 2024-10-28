@@ -12,10 +12,29 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+/**
+ * ProductRepository is responsible for managing product data and
+ * cart items within the application. It interacts with the Room
+ * database to perform CRUD (Create, Read, Update, Delete) operations
+ * on products and cart items, facilitating data persistence and
+ * retrieval.
+ *
+ * Key functionalities of this repository include:
+ *
+ * - Loading initial products into the database and exposing them
+ *   as a StateFlow for observing product changes.
+ * - Managing cart items, including adding products to the cart,
+ *   updating their quantities, and clearing the cart.
+ * - Providing methods to retrieve products and cart items from
+ *   the database.
+ *
+ * The repository employs Kotlin coroutines for asynchronous operations
+ * and ensures that database interactions are performed on the IO
+ * dispatcher to avoid blocking the main thread.
+ */
 class ProductRepository @Inject constructor(
     private val database: AppDatabase
 ) {
-
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     val products: StateFlow<List<Product>> = _products.asStateFlow()
 

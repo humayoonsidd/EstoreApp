@@ -18,7 +18,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.shoppingcart.estoreapp.R
 import com.shoppingcart.estoreapp.data.model.CartItem
 import com.shoppingcart.estoreapp.viewmodel.ProductViewModel
-
+/**
+ * CartScreen is a Composable function that displays the shopping cart
+ * interface. It utilizes a ViewModel to retrieve the list of cart items
+ * and computes the total cost of the items in the cart. The screen
+ * includes the following key features:
+ *
+ * - Displays a title for the cart.
+ * - Shows a list of cart items, each represented by a CartItemRow.
+ * - Calculates and displays the total cost of the items in the cart.
+ * - Provides a button to proceed to checkout.
+ *
+ * The cart items and their total are dynamically updated based on
+ * the state of the ViewModel, ensuring a reactive UI that reflects
+ * any changes in the cart.
+ *
+ * @param viewModel The ViewModel responsible for managing cart-related
+ * data, provided by Hilt for dependency injection.
+ */
 @Composable
 fun CartScreen(viewModel: ProductViewModel = hiltViewModel()) {
     val cartItems = viewModel.cartItems.collectAsState().value
@@ -82,6 +99,20 @@ fun CartScreen(viewModel: ProductViewModel = hiltViewModel()) {
     }
 }
 
+/**
+ * CartItemRow is a Composable function that represents a single item
+ * in the shopping cart. It displays the product's name, quantity,
+ * and total price for that item. The row is presented in a card layout
+ * to visually separate each cart item. Key features include:
+ *
+ * - Displaying the product name in a bold style.
+ * - Showing the quantity of the product in a smaller font.
+ * - Calculating and displaying the total price for the item based on
+ *   the product price and quantity.
+ *
+ * @param cartItem The CartItem data class containing the product and
+ * its quantity, which is displayed in the row.
+ */
 @Composable
 fun CartItemRow(cartItem: CartItem) {
     Card(

@@ -13,6 +13,30 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.shoppingcart.estoreapp.data.model.Product
 import com.shoppingcart.estoreapp.viewmodel.ProductViewModel
 
+/**
+ * ProductListScreen is a Composable function that displays a list of products
+ * available in the shopping application. It retrieves the product data
+ * from the ProductViewModel and presents each product in a vertically
+ * scrollable list. Users can interact with the product items to view
+ * details or add them to their shopping cart.
+ *
+ * Key features include:
+ * - A lazy column that efficiently displays the list of products.
+ * - A button to navigate to the shopping cart, showing the number of items
+ *   currently in the cart.
+ * - Integration with Hilt for dependency injection, allowing easy access
+ *   to the ProductViewModel.
+ *
+ * @param onProductClick A lambda function that takes a Product as a
+ * parameter, used to handle the action when a product item is clicked.
+ * This usually leads to a detailed view of the product.
+ * @param onCartClick A lambda function that handles the action when
+ * the user clicks on the cart button, typically used to navigate to
+ * the cart screen.
+ * @param viewModel The ProductViewModel instance provided by Hilt.
+ * If not provided, it defaults to the Hilt ViewModel instance for
+ * this composable.
+ */
 @Composable
 fun ProductListScreen(
     onProductClick: (Product) -> Unit,
