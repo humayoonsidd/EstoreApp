@@ -43,6 +43,8 @@ fun ProductItem(
     onAddToCart: () -> Unit,
     onProductClick: (Product) -> Unit
 ) {
+    val context = LocalContext.current
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,42 +52,45 @@ fun ProductItem(
             .clickable { onProductClick(product) }
     ) {
         Column(
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(18.dp)
         ) {
             Text(text = product.name, style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = product.description, style = MaterialTheme.typography.bodySmall)
 
-            // Row for price and button
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(text = "$${product.price}", style = MaterialTheme.typography.titleMedium)
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "$${product.price}", style = MaterialTheme.typography.titleMedium)
 
-                Button(onClick = onAddToCart) {
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row {
+                // Add to Cart Button
+                Button(
+                    onClick = onAddToCart,
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .padding(bottom = 2.dp)
+                ) {
                     Text("Add to Cart")
                 }
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.width(8.dp))
 
-                  val context = LocalContext.current
-
-                    Button(onClick = {
+                // Share Product Details Button
+                Button(
+                    onClick = {
                         val intent = Intent().apply {
-                            setAction(Intent.ACTION_SEND)
+                            action = Intent.ACTION_SEND
                             putExtra(Intent.EXTRA_SUBJECT, product.name)
                             putExtra(Intent.EXTRA_TEXT, product.description)
-
-                            setType("text/plan")
+                            type = "text/plain"
                         }
                         context.startActivity(intent)
-                    }) {
-                        Text(stringResource(R.string.share_product_details_str))
-                    }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = stringResource(R.string.share_product_details_str))
+                }
             }
-
         }
     }
 }
