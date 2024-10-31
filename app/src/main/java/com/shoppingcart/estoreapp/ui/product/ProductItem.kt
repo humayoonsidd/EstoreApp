@@ -1,12 +1,19 @@
 package com.shoppingcart.estoreapp.ui.product
 
+import android.content.Intent
+import android.net.Uri
+import android.text.Html
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.shoppingcart.estoreapp.R
 import com.shoppingcart.estoreapp.data.model.Product
+
 /**
  * ProductItem is a Composable function that represents a single product
  * in the shopping application. This function displays the product's
@@ -61,7 +68,24 @@ fun ProductItem(
                 Button(onClick = onAddToCart) {
                     Text("Add to Cart")
                 }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                  val context = LocalContext.current
+
+                    Button(onClick = {
+                        val intent = Intent().apply {
+                            setAction(Intent.ACTION_SEND)
+                            putExtra(Intent.EXTRA_SUBJECT, product.name)
+                            putExtra(Intent.EXTRA_TEXT, product.description)
+
+                            setType("text/plan")
+                        }
+                        context.startActivity(intent)
+                    }) {
+                        Text(stringResource(R.string.share_product_details_str))
+                    }
             }
+
         }
     }
 }
