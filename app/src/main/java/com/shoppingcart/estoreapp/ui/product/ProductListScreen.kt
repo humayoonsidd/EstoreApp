@@ -56,7 +56,6 @@ fun ProductListScreen(
                 ProductItem(product, onAddToCart = { viewModel.addToCart(product) }, onProductClick = onProductClick)
             }
         }
-
         // Display cart count
         Button(
             onClick = onCartClick,
